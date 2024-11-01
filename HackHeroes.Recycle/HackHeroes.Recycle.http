@@ -1,0 +1,6 @@
+@HackHeroes.Recycle_HostAddress = http://localhost:5116
+
+GET {{HackHeroes.Recycle_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

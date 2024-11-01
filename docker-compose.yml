@@ -1,0 +1,69 @@
+services:
+
+  hackheroes.recycle:
+    image: ${DOCKER_REGISTRY-}hackheroesrecycle
+    container_name: recycle.API
+    build:
+      context: .
+      dockerfile: HackHeroes.Recycle/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - OTEL_EXPORTER_OTLP_ENDPOINT=http://recycle.dashboard:18889
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    depends_on:
+      - recycle.db
+    networks:
+      - recycle
+
+
+  recycle.db:
+    image: postgres:latest
+    container_name: recycle.DB
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=recycle
+    volumes:
+     - ./.containers/db/recycledb:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - recycle
+
+
+  recycle.dashboard:
+    image: mcr.microsoft.com/dotnet/nightly/aspire-dashboard:latest
+    container_name: recycle.otlp
+    environment:
+      - TZ=Europe/Warsaw
+    ports:
+    - 18888:18888
+    networks:
+     - recycle
+
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    container_name: recycle.Keycloak
+    command: start-dev
+    environment: 
+      - KC_HEALTH_ENABLED=true
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - ./.containers/identity:/opt/keycloak/data
+    ports:
+      - 18080:8080 
+    networks:
+      - recycle
+
+
+networks:
+  recycle:
+    name: recycle
+    driver: bridge
+
+
+
