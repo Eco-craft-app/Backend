@@ -1,3 +1,4 @@
+using Carter;
 using HackHeroes.Recycle.Extensions;
 using Modules.Projects.Extensions;
 
@@ -19,6 +20,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
+app.MapCarter();
 app.UseHttpsRedirection();
 
 app.Run();

@@ -11,7 +11,7 @@ internal class Comment
     public Guid ProjectId { get; set; }
     public string UserId { get; set; } = default!;
     public string Content { get; set; } = default!;
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public Project? Project { get; set; }
 

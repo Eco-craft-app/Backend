@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sieve.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,10 +9,17 @@ namespace Modules.Projects.Entities;
 internal class Project
 {
     public Guid ProjectId { get; set; }
+
+    [Sieve(CanFilter = true)]
     public string UserId { get; set; } = default!;
+
+    [Sieve(CanFilter = true)]
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public DateTime CreatedAt { get; set; }
+
+    [Sieve(CanSort = true)]
+    public int LikeCount { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<Photo> Photos { get; set; } = [];
     public ICollection<Comment> Comments { get; set; } = [];

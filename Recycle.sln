@@ -7,11 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HackHeroes.Recycle", "HackH
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1477CBDB-0ADB-466D-B267-DC098AE71E4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.StatisticsAndLeaderboard", "Modules.StatisticsAndLeaderboard\Modules.StatisticsAndLeaderboard.csproj", "{5B6877B1-FD77-4CF6-BAA8-5E9C29CE92EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.StatisticsAndLeaderboard", "Modules.StatisticsAndLeaderboard\Modules.StatisticsAndLeaderboard.csproj", "{5B6877B1-FD77-4CF6-BAA8-5E9C29CE92EE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Users", "Modules.Users\Modules.Users.csproj", "{1624673F-3B79-482A-ACDE-7B50B07AE8DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Users", "Modules.Users\Modules.Users.csproj", "{1624673F-3B79-482A-ACDE-7B50B07AE8DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Projects", "Modules.Projects\Modules.Projects.csproj", "{B7523D2C-0B95-4D31-81BE-8DBCC4F6066E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Modules.Projects", "Modules.Projects\Modules.Projects.csproj", "{B7523D2C-0B95-4D31-81BE-8DBCC4F6066E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{3D40BDD9-4141-4D33-8223-C21B0B1D62C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B7523D2C-0B95-4D31-81BE-8DBCC4F6066E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7523D2C-0B95-4D31-81BE-8DBCC4F6066E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7523D2C-0B95-4D31-81BE-8DBCC4F6066E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D40BDD9-4141-4D33-8223-C21B0B1D62C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D40BDD9-4141-4D33-8223-C21B0B1D62C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D40BDD9-4141-4D33-8223-C21B0B1D62C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D40BDD9-4141-4D33-8223-C21B0B1D62C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
