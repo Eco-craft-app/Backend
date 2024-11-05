@@ -24,4 +24,5 @@ internal class Project
     public ICollection<Photo> Photos { get; set; } = [];
     public ICollection<Comment> Comments { get; set; } = [];
     public ICollection<Like> Likes { get; set; } = [];
+
 }

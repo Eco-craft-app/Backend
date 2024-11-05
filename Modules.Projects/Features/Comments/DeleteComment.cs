@@ -24,7 +24,7 @@ public class DeleteComment
         {
             var userId = userContext.GetUserId();
 
-            var comment = await context.Comments.FirstOrDefaultAsync(c => c.CommentId == request.CommentId);
+            var comment = await context.Comments.FirstOrDefaultAsync(c => c.CommentId == request.CommentId, cancellationToken);
 
             if (comment is null)
             {
@@ -49,7 +49,7 @@ public class DeleteCommentEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapDelete("projects/{projectId:guid}/comments/{commentId:guid}", async (Guid commentId, ISender sender) =>
+        app.MapDelete("api/projects/{projectId:guid}/comments/{commentId:guid}", async (Guid commentId, ISender sender) =>
         {
             var result = await sender.Send(new DeleteComment.DeleteCommentCommand(commentId));
 

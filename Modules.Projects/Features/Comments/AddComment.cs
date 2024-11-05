@@ -47,7 +47,7 @@ public class AddComment
                 return Result.Failure<CommentDto>(Error.Validation(validationResult.ToString()));
             }
 
-            var project = await context.Projects.FirstOrDefaultAsync(x => x.ProjectId == request.ProjectId);
+            var project = await context.Projects.FirstOrDefaultAsync(x => x.ProjectId == request.ProjectId, cancellationToken);
 
             if (project is null)
             {
@@ -77,7 +77,7 @@ public class AddCommentEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapPost("projects/{projectId:guid}/comments", async (Guid projectId, AddCommentRequest request, IMediator mediator) =>
+        app.MapPost("api/ogarprojects/{projectId:guid}/comments", async (Guid projectId, AddCommentRequest request, IMediator mediator) =>
         {
             var command = new AddComment.AddCommentCommand(projectId, request.Content);
 

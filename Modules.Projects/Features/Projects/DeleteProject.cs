@@ -24,7 +24,7 @@ public class DeleteProject
         {
             var userId = userContext.GetUserId();
 
-            var project = await context.Projects.FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId);
+            var project = await context.Projects.FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId, cancellationToken);
 
             if (project is null)
             {

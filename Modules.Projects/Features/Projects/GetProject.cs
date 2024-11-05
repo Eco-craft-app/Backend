@@ -26,7 +26,7 @@ public class GetProject
             var project = await context.Projects
                 .Include(p => p.Photos)
                 .Include(p => p.Comments)
-                .FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId);
+                .FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId, cancellationToken);
 
             if (project is null)
             {

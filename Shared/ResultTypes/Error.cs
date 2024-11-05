@@ -15,6 +15,7 @@ public record Error(string Code, string Message)
     public static Error NotFound(string code) => new(code, "The specified entity was not found.");
     public static Error Validation(string validationDetails) => new("Validation error.", validationDetails);
     public static Error Forbidden() => new("No access.", "You have no access to this resource.");
+    public static Error Conflict(string message) => new("Conflict occured.", message);
 
 
 }

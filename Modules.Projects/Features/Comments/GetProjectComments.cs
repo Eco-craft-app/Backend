@@ -56,7 +56,7 @@ public class GetProjectCommentsEndpoint : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        app.MapGet("projects/{projectId:guid}/comments", async (Guid projectId, [AsParameters] SieveModel model, ISender sender) =>
+        app.MapGet("api/projects/{projectId:guid}/comments", async (Guid projectId, [AsParameters] SieveModel model, ISender sender) =>
         {
             var result = await sender.Send(new GetProjectComments.Query(projectId, model));
 

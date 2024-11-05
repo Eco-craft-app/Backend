@@ -51,7 +51,7 @@ public class UpdateProject
 
             var userId = userContext.GetUserId();
 
-            var project = await context.Projects.Include(p => p.Photos).FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId);
+            var project = await context.Projects.Include(p => p.Photos).FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId, cancellationToken);
 
             if (project is null)
             {
