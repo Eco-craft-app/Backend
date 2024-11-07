@@ -82,7 +82,7 @@ public class AddProjectEndpoint : ICarterModule
 
             return Results.Created("api/projects", result.Value);
         })
-        //.RequireAuthorization()
+        .RequireAuthorization()
         .WithTags("Projects");
     }
 }
