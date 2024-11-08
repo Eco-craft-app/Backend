@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Modules.Projects\Modules.Projects.csproj" />
+    <ProjectReference Include="..\Modules.Users\Modules.Users.csproj" />
   </ItemGroup>
 	
 

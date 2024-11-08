@@ -56,7 +56,7 @@ public class GetProjectEndpoint : ICarterModule
 
             return Results.Ok(result.Value);
         })
-        //.RequireAuthorization()
+        .RequireAuthorization()
         .WithTags("Projects"); 
     }
 }

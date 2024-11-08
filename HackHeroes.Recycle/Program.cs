@@ -1,6 +1,7 @@
 using Carter;
 using HackHeroes.Recycle.Extensions;
 using Modules.Projects.Extensions;
+using Modules.Users.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProjectsServices(builder.Configuration);
+builder.Services.AddUsersModuleServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Modules.Projects.Database;
+using Modules.Users.Database;
 
 namespace HackHeroes.Recycle.Extensions;
 
@@ -9,8 +10,10 @@ public static class MigrationsExtension
     {
         using var scope = app.Services.CreateScope();
 
-        var dbContext = scope.ServiceProvider.GetRequiredService<ProjectsDbContext>();
+        var projectsDbContext = scope.ServiceProvider.GetRequiredService<ProjectsDbContext>();
+        var usersDbContext = scope.ServiceProvider.GetRequiredService<UsersProfilesDbContext>();
 
-        dbContext.Database.Migrate();
+        projectsDbContext.Database.Migrate();
+        usersDbContext.Database.Migrate();
     }
 }
