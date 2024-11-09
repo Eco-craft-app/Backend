@@ -11,6 +11,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddProjectsServices(builder.Configuration);
 builder.Services.AddUsersModuleServices(builder.Configuration);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("WithFrontend",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")    
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
@@ -22,6 +33,7 @@ if (app.Environment.IsDevelopment())
     app.ApplyMigrations();
 }
 
+app.UseCors("WithFrontend");
 app.MapCarter();
 app.UseHttpsRedirection();
 

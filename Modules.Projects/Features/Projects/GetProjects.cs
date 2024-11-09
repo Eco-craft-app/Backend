@@ -37,6 +37,7 @@ public static class GetProjects
                 .Apply(request.Model, projects)
                 .Select(p => new ProjectSummaryDto
                 {
+                    UserId = p.UserId,
                     ProjectId = p.ProjectId,
                     Title = p.Title,
                     PhotoUrl = p.Photos.FirstOrDefault()!.Url,

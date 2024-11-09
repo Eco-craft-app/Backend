@@ -1,8 +1,12 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Carter;
+using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Users.Database;
+using Modules.Users.Features;
+using Modules.Users.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +34,11 @@ internal static class ServiceCollectionExtensions
 
     private static void AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-
+        services.AddHttpContextAccessor();
+        services.AddScoped<IUserContextService, UserContextService>();
+        var assembly = typeof(AddUserProfile).Assembly;
+        services.AddValidatorsFromAssembly(assembly);
+        services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
     }
 
 
