@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Projects.Entities;
-internal class Project
+public class Project
 {
     public Guid ProjectId { get; set; }
 
     [Sieve(CanFilter = true)]
     public string UserId { get; set; } = default!;
+    public string? UserAvatarUrl { get; set; }
+    public string? UserName { get; set; }
 
     [Sieve(CanFilter = true)]
     public string Title { get; set; } = default!;

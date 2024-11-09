@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Users.Database;
-internal class UsersProfilesDbContext(DbContextOptions<UsersProfilesDbContext> opt) : DbContext(opt) 
+public class UsersProfilesDbContext(DbContextOptions<UsersProfilesDbContext> opt) : DbContext(opt) 
 {
     public DbSet<UserProfile> UsersProfiles { get; set; }
 

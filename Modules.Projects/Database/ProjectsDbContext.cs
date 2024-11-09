@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Projects.Database;
-internal class ProjectsDbContext(DbContextOptions<ProjectsDbContext> opt) : DbContext(opt)
+public class ProjectsDbContext(DbContextOptions<ProjectsDbContext> opt) : DbContext(opt)
 {
     public DbSet<Project> Projects { get; set; }
     public DbSet<Photo> Photos { get; set; }

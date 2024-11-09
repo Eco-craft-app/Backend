@@ -8,6 +8,7 @@ namespace Modules.Users.Entities;
 public class UserProfile
 {
     public Guid Id { get; set; }
+    public string UserName { get; set; } = default!;
     public string AvatarUrl { get; set; } = "https://res.cloudinary.com/default-placeholder";
     public string? Bio { get; set; }
     public string Location { get; set; } = string.Empty;

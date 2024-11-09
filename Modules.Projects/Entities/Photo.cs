@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Projects.Entities;
-internal class Photo
+public class Photo
 {
     public Guid PhotoId { get; set; }
     public Guid ProjectId { get; set; }

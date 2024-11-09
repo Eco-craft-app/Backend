@@ -27,6 +27,7 @@ public class GetUserProfile
                 .Select(up => new UserProfileDto
                 {
                     Id = up.Id,
+                    UserName = up.UserName,
                     AvatarUrl = up.AvatarUrl,
                     Bio = up.Bio,
                     Location = up.Location,

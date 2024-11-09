@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Projects.Entities;
-internal class Like
+public class Like
 {
     public Guid LikeId { get; set; }
     public Guid ProjectId { get; set; }

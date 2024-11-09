@@ -45,6 +45,10 @@ namespace Modules.Users.Migrations
                     b.Property<int>("TotalProjects")
                         .HasColumnType("integer");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("UsersProfiles");

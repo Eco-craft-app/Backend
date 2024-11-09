@@ -1,5 +1,6 @@
 ﻿using Carter;
 using FluentValidation;
+using MediatR.NotificationPublishers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +42,11 @@ internal static class ServiceCollectionExtensions
         var assembly = typeof(AddProject).Assembly;
         services.AddValidatorsFromAssembly(assembly);
         services.AddScoped<ISieveProcessor, ProjectsSieveProcessor>();
-        services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(assembly);
+            config.NotificationPublisher = new ForeachAwaitPublisher();
+        });
         services.AddCarter();
 
     }

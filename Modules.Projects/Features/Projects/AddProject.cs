@@ -9,6 +9,7 @@ using Modules.Projects.Database;
 using Modules.Projects.Entities;
 using Modules.Projects.Models.DTOs;
 using Modules.Projects.Services;
+using Shared.Events;
 using Shared.ResultTypes;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ public class AddProject
         }
     }
 
-    internal sealed class AddProjectHandler(ProjectsDbContext context, IValidator<AddProjectCommand> validator, IUserContextService userContext) : IRequestHandler<AddProjectCommand, Result<ProjectDto>>
+    internal sealed class AddProjectHandler(ProjectsDbContext context, IValidator<AddProjectCommand> validator, IUserContextService userContext, IPublisher publisher) : IRequestHandler<AddProjectCommand, Result<ProjectDto>>
     {
         public async Task<Result<ProjectDto>> Handle(AddProjectCommand request, CancellationToken cancellationToken)
         {
@@ -59,6 +60,8 @@ public class AddProject
             context.Projects.Add(project);
 
             await context.SaveChangesAsync(cancellationToken);
+
+            await publisher.Publish(new ProjectCreated(project.ProjectId, Guid.Parse(project.UserId)), cancellationToken);
 
             return Result.Success(project.Adapt<ProjectDto>());
         }

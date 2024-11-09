@@ -20,7 +20,7 @@ using static Modules.Users.Features.AddUserProfile;
 namespace Modules.Users.Features;
 public class AddUserProfile
 {
-    public record AddUserProfileCommand(string AvatarUrl, string? Bio, string Location) : IRequest<Result<UserProfileDto>>;
+    public record AddUserProfileCommand(string AvatarUrl,string UserName, string? Bio, string Location) : IRequest<Result<UserProfileDto>>;
 
     public class Validator : AbstractValidator<AddUserProfileCommand>
     {
@@ -58,6 +58,7 @@ public class AddUserProfile
             var userProfile = new UserProfile
             {
                 Id = Guid.Parse(userId!),
+                UserName = request.UserName,
                 AvatarUrl = request.AvatarUrl,
                 Bio = request.Bio,
                 Location = request.Location,

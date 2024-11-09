@@ -118,8 +118,14 @@ namespace Modules.Projects.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UserAvatarUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("UserId")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("text");
 
                     b.HasKey("ProjectId");

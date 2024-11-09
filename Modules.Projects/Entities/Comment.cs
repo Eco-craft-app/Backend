@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Modules.Projects.Entities;
-internal class Comment
+public class Comment
 {
     public Guid CommentId { get; set; }
     public Guid ProjectId { get; set; }

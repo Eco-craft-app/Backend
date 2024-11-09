@@ -41,6 +41,8 @@ public static class GetProjects
                     ProjectId = p.ProjectId,
                     Title = p.Title,
                     PhotoUrl = p.Photos.FirstOrDefault()!.Url,
+                    UserAvatarUrl = p.UserAvatarUrl!,
+                    UserName = p.UserName!,
                     CreatedAt = p.CreatedAt,
                     LikeCount = p.LikeCount
                 })
