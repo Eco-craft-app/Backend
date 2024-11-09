@@ -23,10 +23,10 @@ public class GetUserProfile
         public async Task<Result<UserProfileDto>> Handle(GetUserProfileQuery request, CancellationToken cancellationToken)
         {
             var userProfile = await context.UsersProfiles
-                .Where(up => up.Id == request.UserId)
+                .Where(up => up.UserId == request.UserId)
                 .Select(up => new UserProfileDto
                 {
-                    Id = up.Id,
+                    UserId = up.UserId,
                     UserName = up.UserName,
                     AvatarUrl = up.AvatarUrl,
                     Bio = up.Bio,

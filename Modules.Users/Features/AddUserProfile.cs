@@ -57,7 +57,7 @@ public class AddUserProfile
 
             var userProfile = new UserProfile
             {
-                Id = Guid.Parse(userId!),
+                UserId = Guid.Parse(userId!),
                 UserName = request.UserName,
                 AvatarUrl = request.AvatarUrl,
                 Bio = request.Bio,

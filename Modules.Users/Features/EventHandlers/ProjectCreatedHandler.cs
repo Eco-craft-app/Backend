@@ -14,7 +14,7 @@ public class ProjectCreatedHandler(UsersProfilesDbContext context, IPublisher pu
     public async Task Handle(ProjectCreated notification, CancellationToken cancellationToken)
     {
         var user = await context.UsersProfiles
-             .Where(u => u.Id == notification.UserId)
+             .Where(u => u.UserId == notification.UserId)
              .Select(u => new { u.UserName, u.AvatarUrl })
              .FirstOrDefaultAsync(cancellationToken);
 

@@ -24,7 +24,7 @@ namespace Modules.Users.Migrations
 
             modelBuilder.Entity("Modules.Users.Entities.UserProfile", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
@@ -49,7 +49,7 @@ namespace Modules.Users.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId");
 
                     b.ToTable("UsersProfiles");
                 });

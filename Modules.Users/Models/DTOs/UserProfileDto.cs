@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Modules.Users.Models.DTOs;
 internal class UserProfileDto
 {
-    public Guid Id { get; set; }
+    public Guid UserId { get; set; }
     public string UserName { get; set; } = default!;
     public string AvatarUrl { get; set; } = string.Empty;
     public string? Bio { get; set; }

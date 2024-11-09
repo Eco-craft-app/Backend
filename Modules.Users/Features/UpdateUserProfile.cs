@@ -67,7 +67,7 @@ public class UpdateUserProfile
 
             await context.SaveChangesAsync(cancellationToken);
 
-            await publisher.Publish(new UserProfileUpdated(userProfile.Id, userProfile.UserName, userProfile.AvatarUrl));
+            await publisher.Publish(new UserProfileUpdated(userProfile.UserId, userProfile.UserName, userProfile.AvatarUrl));
 
 
             return Result.Success(userProfile.Adapt<UserProfileDto>());

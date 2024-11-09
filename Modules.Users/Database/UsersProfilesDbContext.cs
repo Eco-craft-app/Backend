@@ -13,6 +13,9 @@ public class UsersProfilesDbContext(DbContextOptions<UsersProfilesDbContext> opt
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<UserProfile>()
+            .HasKey(u => u.UserId);
+
         base.OnModelCreating(modelBuilder);
     }
 }
