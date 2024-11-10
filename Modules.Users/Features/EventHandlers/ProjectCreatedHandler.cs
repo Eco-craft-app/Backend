@@ -15,11 +15,14 @@ public class ProjectCreatedHandler(UsersProfilesDbContext context, IPublisher pu
     {
         var user = await context.UsersProfiles
              .Where(u => u.UserId == notification.UserId)
-             .Select(u => new { u.UserName, u.AvatarUrl })
              .FirstOrDefaultAsync(cancellationToken);
+
+
 
         if (user is not null)
         {
+            user.TotalProjects++;
+            await context.SaveChangesAsync(cancellationToken);
             await publisher.Publish(new UserInfoProvided(notification.ProjectId, user.UserName, user.AvatarUrl), cancellationToken);
         }
     }

@@ -12,6 +12,7 @@ public class ProjectSummaryDto
     public string Title { get; set; } = default!;
     public int LikeCount { get; set; }
     public string? PhotoUrl { get; set; }
+    public bool IsLikedByCurrentUser { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public string UserName { get; set; } = default!;
     public string UserAvatarUrl { get; set; } = default!;

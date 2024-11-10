@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Projects.Database;
 using Modules.Projects.Entities;
 using Modules.Projects.Services;
+using Shared.Events;
 using Shared.ResultTypes;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ public class AddLike
 {
     public record AddLikeCommand(Guid ProjectId) : IRequest<Result>;
 
-    internal sealed class Handler(ProjectsDbContext context, IUserContextService userContextService) : IRequestHandler<AddLikeCommand, Result>
+    internal sealed class Handler(ProjectsDbContext context, IUserContextService userContextService, IPublisher publisher) : IRequestHandler<AddLikeCommand, Result>
     {
         public async Task<Result> Handle(AddLikeCommand request, CancellationToken cancellationToken)
         {
@@ -52,6 +53,8 @@ public class AddLike
             project.LikeCount++;
 
             await context.SaveChangesAsync(cancellationToken);
+
+            await publisher.Publish(new UsersProjectLiked(Guid.Parse(project.UserId)),cancellationToken);
 
             return Result.Success();
 

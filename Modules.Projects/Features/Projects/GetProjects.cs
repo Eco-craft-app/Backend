@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Modules.Projects.Database;
 using Modules.Projects.Models.DTOs;
 using Modules.Projects.Models.Response;
+using Modules.Projects.Services;
 using Shared.ResultTypes;
 using Sieve.Models;
 using Sieve.Services;
@@ -24,10 +25,12 @@ public static class GetProjects
         public SieveModel Model { get; set; } = default!;
     }
 
-    internal sealed class Handler(ProjectsDbContext context, ISieveProcessor sieveProcessor) : IRequestHandler<Query, Result<PagedResult<ProjectSummaryDto>>>
+    internal sealed class Handler(ProjectsDbContext context, ISieveProcessor sieveProcessor, IUserContextService userContext) : IRequestHandler<Query, Result<PagedResult<ProjectSummaryDto>>>
     {
         public async Task<Result<PagedResult<ProjectSummaryDto>>> Handle(Query request, CancellationToken cancellationToken)
         {
+            var userId = userContext.GetUserId();
+
             var projects = context.Projects
                 .Include(p => p.Photos.Where(p => p.IsMain == true))
                 .Include(p => p.Comments)
@@ -47,6 +50,19 @@ public static class GetProjects
                     LikeCount = p.LikeCount
                 })
                 .ToListAsync(cancellationToken);
+
+            if(userId is not null)
+            {
+                var projectIds = projectSummaries.Select(p => p.ProjectId).ToList();
+                var userLikes = await context.Likes
+                    .Where(like => like.UserId == userId && projectIds.Contains(like.ProjectId))
+                    .ToListAsync(cancellationToken);
+
+                foreach (var project in projectSummaries)
+                {
+                    project.IsLikedByCurrentUser = userLikes.Any(like => like.ProjectId == project.ProjectId);
+                }
+            }
 
 
             var totalCount = await sieveProcessor.Apply(request.Model, projects, applyPagination: false, applySorting: false)
