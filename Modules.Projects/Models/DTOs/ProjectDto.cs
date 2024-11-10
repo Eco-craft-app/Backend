@@ -16,6 +16,5 @@ public class ProjectDto
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<PhotoDto> Photos { get; set; } = [];
-    public ICollection<CommentDto> Comments { get; set; } = [];
 
 }

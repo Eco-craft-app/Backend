@@ -20,7 +20,7 @@ using static Modules.Users.Features.UpdateUserProfile;
 namespace Modules.Users.Features;
 public class UpdateUserProfile
 {
-    public record UpdateUserProfileCommand(string AvatarUrl, string UserName, string? Bio, string Location) : IRequest<Result<UserProfileDto>>;
+    public record UpdateUserProfileCommand(string AvatarUrl, string? Bio, string Location) : IRequest<Result<UserProfileDto>>;
 
     public class Validator : AbstractValidator<UpdateUserProfileCommand>
     {
@@ -61,13 +61,12 @@ public class UpdateUserProfile
             }
 
             userProfile.AvatarUrl = request.AvatarUrl;
-            userProfile.UserName = request.UserName;
             userProfile.Bio = request.Bio;
             userProfile.Location = request.Location;
 
             await context.SaveChangesAsync(cancellationToken);
 
-            await publisher.Publish(new UserProfileUpdated(userProfile.UserId, userProfile.UserName, userProfile.AvatarUrl));
+            await publisher.Publish(new UserProfileUpdated(userProfile.UserId, userProfile.AvatarUrl));
 
 
             return Result.Success(userProfile.Adapt<UserProfileDto>());

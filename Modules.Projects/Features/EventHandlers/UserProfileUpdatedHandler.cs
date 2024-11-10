@@ -17,10 +17,18 @@ public class UserProfileUpdatedHandler(ProjectsDbContext context) : INotificatio
             .Where(p => p.UserId == notification.UserId.ToString())
             .ToListAsync(cancellationToken);
 
+        var comments = await context.Comments
+            .Where(c => c.UserId == notification.UserId.ToString())
+            .ToListAsync(cancellationToken);
+
         foreach (var project in projects)
         {
-            project.UserName = notification.UserName;
             project.UserAvatarUrl = notification.AvatarUrl;
+        }
+
+        foreach (var comment in comments)
+        {
+            comment.UserAvatarUrl = notification.AvatarUrl;
         }
 
         await context.SaveChangesAsync(cancellationToken);

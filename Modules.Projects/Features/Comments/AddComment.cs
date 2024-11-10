@@ -11,6 +11,7 @@ using Modules.Projects.Entities;
 using Modules.Projects.Models.DTOs;
 using Modules.Projects.Models.Requests;
 using Modules.Projects.Services;
+using Shared.Events;
 using Shared.ResultTypes;
 using System;
 using System.Collections.Generic;
@@ -36,7 +37,7 @@ public class AddComment
     }
 
 
-    internal sealed class Handler(ProjectsDbContext context, IValidator<AddCommentCommand> validator, IUserContextService userContext) : IRequestHandler<AddCommentCommand, Result<CommentDto>>
+    internal sealed class Handler(ProjectsDbContext context, IValidator<AddCommentCommand> validator, IUserContextService userContext, IPublisher publisher) : IRequestHandler<AddCommentCommand, Result<CommentDto>>
     {
         public async Task<Result<CommentDto>> Handle(AddCommentCommand request, CancellationToken cancellationToken)
         {
@@ -66,6 +67,8 @@ public class AddComment
             context.Comments.Add(comment);
 
             await context.SaveChangesAsync(cancellationToken);
+
+            await publisher.Publish(new CommentCreated(comment.CommentId, Guid.Parse(comment.UserId)), cancellationToken);
 
             return Result.Success(comment.Adapt<CommentDto>());
         }

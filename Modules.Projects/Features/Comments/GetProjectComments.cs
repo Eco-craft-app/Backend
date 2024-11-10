@@ -37,7 +37,9 @@ public class GetProjectComments
                     CommentId = c.CommentId,
                     Content = c.Content,
                     CreatedAt = c.CreatedAt,
-                    UserId = c.UserId
+                    UserId = c.UserId,
+                    UserName = c.UserName!,
+                    UserAvatarUrl = c.UserAvatarUrl!
                 })
                 .ToListAsync(cancellationToken);
 

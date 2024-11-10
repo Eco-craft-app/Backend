@@ -25,7 +25,6 @@ public class GetProject
         {
             var project = await context.Projects
                 .Include(p => p.Photos)
-                .Include(p => p.Comments)
                 .FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId, cancellationToken);
 
             if (project is null)
@@ -56,7 +55,7 @@ public class GetProjectEndpoint : ICarterModule
 
             return Results.Ok(result.Value);
         })
-        .RequireAuthorization()
+        //.RequireAuthorization()
         .WithTags("Projects"); 
     }
 }

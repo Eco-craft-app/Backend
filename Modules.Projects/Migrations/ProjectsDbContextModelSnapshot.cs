@@ -38,8 +38,14 @@ namespace Modules.Projects.Migrations
                     b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid");
 
+                    b.Property<string>("UserAvatarUrl")
+                        .HasColumnType("text");
+
                     b.Property<string>("UserId")
                         .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserName")
                         .HasColumnType("text");
 
                     b.HasKey("CommentId");
