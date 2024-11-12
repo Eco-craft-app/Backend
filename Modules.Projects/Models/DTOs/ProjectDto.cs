@@ -12,7 +12,8 @@ public class ProjectDto
     public string UserId { get; set; } = default!;
     public string Title { get; set; } = default!;
     public string Description { get; set; } = default!;
-    public int LikeCount { get; set; }   
+    public int LikeCount { get; set; }
+    public bool IsLikedByCurrentUser { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public ICollection<PhotoDto> Photos { get; set; } = [];

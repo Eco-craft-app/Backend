@@ -50,7 +50,8 @@ namespace Modules.Projects.Migrations
 
                     b.HasKey("CommentId");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("IX_Comments_ProjectId");
 
                     b.ToTable("Comments");
                 });
@@ -74,6 +75,12 @@ namespace Modules.Projects.Migrations
                     b.HasKey("LikeId");
 
                     b.HasIndex("ProjectId");
+
+                    b.HasIndex("UserId")
+                        .HasDatabaseName("IX_Likes_UserId");
+
+                    b.HasIndex("UserId", "ProjectId")
+                        .HasDatabaseName("IX_Likes_UserId_ProjectId");
 
                     b.ToTable("Likes");
                 });
@@ -135,6 +142,12 @@ namespace Modules.Projects.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("ProjectId");
+
+                    b.HasIndex("Title")
+                        .HasDatabaseName("IX_Projects_Title");
+
+                    b.HasIndex("UserId", "CreatedAt")
+                        .HasDatabaseName("IX_Projects_UserId_CreatedAt");
 
                     b.ToTable("Projects");
                 });

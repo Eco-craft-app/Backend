@@ -52,6 +52,7 @@ internal static class ServiceCollectionExtensions
     }
 
 
+
     private static void AddAuth(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddAuthorization(opt =>

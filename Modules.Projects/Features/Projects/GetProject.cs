@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Modules.Projects.Database;
 using Modules.Projects.Models.DTOs;
+using Modules.Projects.Services;
 using Shared.ResultTypes;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,15 @@ public class GetProject
 {
     public record Query(Guid ProjectId) : IRequest<Result<ProjectDto>>;
 
-    internal sealed class Handler(ProjectsDbContext context) : IRequestHandler<Query, Result<ProjectDto>>
+    internal sealed class Handler(ProjectsDbContext context, IUserContextService userContext) : IRequestHandler<Query, Result<ProjectDto>>
     {
         public async Task<Result<ProjectDto>> Handle(Query request, CancellationToken cancellationToken)
         {
             var project = await context.Projects
                 .Include(p => p.Photos)
+                .Include(p => p.Likes)
                 .FirstOrDefaultAsync(p => p.ProjectId == request.ProjectId, cancellationToken);
+
 
             if (project is null)
             {
@@ -33,6 +36,18 @@ public class GetProject
             }
 
             var projectDto = project.Adapt<ProjectDto>();
+
+            var userId = userContext.GetUserId();
+
+            if(userId is not null)
+            {
+                 if(project.Likes.Any(l => l.UserId == userId))
+                {
+                    projectDto.IsLikedByCurrentUser = true;
+                }
+
+            }
+
 
             return Result.Success(projectDto);
         }

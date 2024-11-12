@@ -38,6 +38,10 @@ services:
     container_name: recycle.otlp
     environment:
       - TZ=Europe/Warsaw
+      - DASHBOARD__TELEMETRYLIMITS__MAXLOGCOUNT=1000
+      - DASHBOARD__TELEMETRYLIMITS__MAXTRACECOUNT=1000
+      - DASHBOARD__TELEMETRYLIMITS__MAXMETRICSCOUNT=1000
+      - DASHBOARD__OTLP__CORS__ALLOWEDORIGINS=https://localhost:5001
     ports:
     - 18888:18888
     networks:
