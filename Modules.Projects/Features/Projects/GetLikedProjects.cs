@@ -39,8 +39,12 @@ public class GetLikedProjects
                 {
                     ProjectId = p.ProjectId,
                     Title = p.Title,
-                    PhotoUrl = p.Photos.FirstOrDefault()!.Url,
+                    PhotoUrl = p.Photos.FirstOrDefault(p => p.IsMain == true)!.Url,
                     CreatedAt = p.CreatedAt,
+                    UserAvatarUrl = p.UserAvatarUrl!,
+                    UserId = p.UserId,
+                    UserName = p.UserName!,
+                    IsLikedByCurrentUser = true,
                     LikeCount = p.LikeCount
                 })
                 .ToListAsync(cancellationToken);

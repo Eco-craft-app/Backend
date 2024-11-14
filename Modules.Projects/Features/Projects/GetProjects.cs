@@ -43,7 +43,7 @@ public static class GetProjects
                     UserId = p.UserId,
                     ProjectId = p.ProjectId,
                     Title = p.Title,
-                    PhotoUrl = p.Photos.FirstOrDefault()!.Url,
+                    PhotoUrl = p.Photos.FirstOrDefault(p => p.IsMain)!.Url,
                     UserAvatarUrl = p.UserAvatarUrl!,
                     UserName = p.UserName!,
                     CreatedAt = p.CreatedAt,
